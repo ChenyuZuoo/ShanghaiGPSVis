@@ -6,7 +6,7 @@ Then data visualization.
 And the final stage is pattern analysis.
 
 
-loadwhole.py is used for import data in bulk.
+loadwhole.py is used for import data in bulk.  
 
 readline.py is simply used for print lines in big files.
 
