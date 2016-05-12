@@ -29,8 +29,8 @@ try:
    ave_p = map(ave, sum_r)
    print ave'''
    length = len(results)
-   for(i = 0; i < length; i++):
-       return
+   for row in results:
+      f.write(row + "\n")
 
 except:
    print "Error: unable to fecth data"
