@@ -13,6 +13,7 @@ countLine = 0
 #file path
 path_0621 = 'E:/Slides/LBS/TaxiData/20100621.txt'
 path_0401 = 'E:/Slides/LBS/TaxiData/20100401.txt'
+path_0401_ave = 'E:/Slides/LBS/TaxiData/20100401.txt'
 path_e = 'E:/Slides/LBS/TaxiData/exprdata.txt'
 
 #sql create table syntax
@@ -50,12 +51,12 @@ def commit2db(f, sql_insert):
 	#insert last row, sql append without ","
 	str_ori = f.readline()
 	str_sp = str_ori.split(',')
-	if (str_sp[9] == "0"):
-		sql_insert = sql_insert[:-1]
-		print "committed to db"
-		cur.execute(sql_insert)
-		db.commit()
-		return
+	# if (str_sp[9] == "0"):
+	# 	sql_insert = sql_insert[:-1]
+	# 	print "committed to db"
+	# 	cur.execute(sql_insert)
+	# 	db.commit()
+	# 	return
 	time_h = str_sp[-1][-10:-8]  # formate 'datetime' into 'time'
 	time_m = str_sp[-1][-7:-5]
 	time_s = str_sp[-1][-4:-2]
@@ -91,10 +92,10 @@ try:
 			#if read to the penultimate line line, change the stop control,
 			if (countLine * 200 + count) == (file_line - 1):
 				str_sp = str_ori.split(',')
-				if (str_sp[8] == "0"):
-					sql_insert = sql_insert[:-1]
-					commit2db(f, sql_insert)
-					raise FoundException
+				# if (str_sp[8] == "0"):
+				# 	sql_insert = sql_insert[:-1]
+				# 	commit2db(f, sql_insert)
+				# 	raise FoundException
 				time_h = str_sp[-1][-10:-8]  # format 'datetime' into 'time'
 				time_m = str_sp[-1][-7:-5]
 				time_s = str_sp[-1][-4:-2]
