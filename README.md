@@ -11,3 +11,5 @@ loadwhole.py is used for import data in bulk.
 readline.py is simply used for print lines in big files.
 
 filter.py is used for out put compute average position of one point.
+
+htFilter is used to rextract the records when passengers on or off taxis.
