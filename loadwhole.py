@@ -21,14 +21,14 @@ path_e = 'E:/Slides/LBS/TaxiData/exprdata.txt'
 # 						(id MEDIUMINT NOT NULL AUTO_INCREMENT, date VARCHAR(16), taxi_id VARCHAR(16), company VARCHAR(2), orientation int,
 # 						lon float, lat float, velocity float, alti int, passenger tinyint,
 # 						validity tinyint, time_h tinyint, time_m tinyint, time_s tinyint, PRIMARY KEY (id))"""
-sql_create_table = """CREATE TABLE taxi0401
+sql_create_table = """CREATE TABLE taxi04010
 						(taxi_id VARCHAR(16), lon float, lat float, passenger tinyint, time_h tinyint, time_m tinyint, time_s tinyint)"""
 # connect to MySQL
 db = MySQLdb.connect(host = DB_HOST, user = DB_USER, passwd = DB_PASSWD)
 cur = db.cursor()
 # cur.execute('create database if not exists taxi')
 db.select_db('taxi')
-cur.execute("drop table taxi0401")
+# cur.execute("drop table taxi0401")
 cur.execute(sql_create_table)
 
 #count total line number of file
@@ -60,7 +60,7 @@ def commit2db(f, sql_insert):
 	time_h = str_sp[-1][-10:-8]  # formate 'datetime' into 'time'
 	time_m = str_sp[-1][-7:-5]
 	time_s = str_sp[-1][-4:-2]
-	sql_insert += " ('{0}',{1},{2},{3},{4},{5},{6})".format(str_sp[1],str_sp[4],str_sp[5],str_sp[8],time_h,time_m, time_s)
+	sql_insert += " ('{0}',{1},{2},{3},{4},{5},{6})".format(str_sp[3],str_sp[4],str_sp[5],str_sp[8],time_h,time_m, time_s)
 
 	print "committed to db"
 	cur.execute(sql_insert)
@@ -84,7 +84,7 @@ try:
 	#if read to the penultimate line line, then go to jump2line function and jump out of loop
 	#f = jump2line(105)
 	while(1):
-		sql_insert = """insert into taxi0401 (taxi_id, lon, lat, passenger, time_h, time_m, time_s)
+		sql_insert = """insert into taxi04010 (taxi_id, lon, lat, passenger, time_h, time_m, time_s)
 											values """
 		while(count < 200):
 			str_ori = f.readline()
@@ -99,7 +99,7 @@ try:
 				time_h = str_sp[-1][-10:-8]  # format 'datetime' into 'time'
 				time_m = str_sp[-1][-7:-5]
 				time_s = str_sp[-1][-4:-2]
-				sql_insert += " ('{0}',{1},{2},{3},{4},{5},{6}),".format(str_sp[1],str_sp[4],str_sp[5],str_sp[8],time_h,time_m, time_s)
+				sql_insert += " ('{0}',{1},{2},{3},{4},{5},{6}),".format(str_sp[3],str_sp[4],str_sp[5],str_sp[8],time_h,time_m, time_s)
 				commit2db(f, sql_insert)
 				raise FoundException
 			str_sp = str_ori.split(',')
@@ -109,7 +109,7 @@ try:
 			time_h = str_sp[-1][-10:-8]  #formate 'datetime' into 'time'
 			time_m = str_sp[-1][-7:-5]
 			time_s = str_sp[-1][-4:-2]
-			sql_insert +=" ('{0}',{1},{2},{3},{4},{5},{6}),".format(str_sp[1],str_sp[4],str_sp[5],str_sp[8],time_h,time_m, time_s)
+			sql_insert +=" ('{0}',{1},{2},{3},{4},{5},{6}),".format(str_sp[3],str_sp[4],str_sp[5],str_sp[8],time_h,time_m, time_s)
 			count = count +1
 		commit2db(f, sql_insert)
 

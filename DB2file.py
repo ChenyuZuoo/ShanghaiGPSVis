@@ -13,9 +13,10 @@ db = MySQLdb.connect(host = DB_HOST, user = DB_USER, passwd = DB_PASSWD, db=DB_D
 cur = db.cursor()
 db.select_db('taxi')
 '''taxi_id,lon,lat'''
-sql_select = '''select * from taxi0401_ave_order'''
+sql_select = '''select * from taxi04010_ave_order'''
 
-path_0401_ave = 'E:/Slides/LBS/TaxiData/20100401_ave_order.txt'
+# path_0401_ave = 'E:/Slides/LBS/TaxiData/201004010_ave_order.txt'
+path_0401_ave = 'E:/Slides/LBS/TaxiData/201004010_ave_order_test.txt'
 f = open(path_0401_ave, "w")
 
 try:
